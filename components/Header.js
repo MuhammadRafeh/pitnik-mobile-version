@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/Entypo';
 import Modal from "react-native-modal";
 
-import Autocomplete from 'react-native-autocomplete-input';
+const { height } = Dimensions.get('window')
+
+import EmojiSelector, { Categories } from "react-native-emoji-selector";
+// import Autocomplete from 'react-native-autocomplete-input';
 import CustomIcon from './CustomIcon';
 
 const Header = props => {
     const [showModal, setShowModal] = useState(false);
     const [text, setText] = useState('');
+    const [isShowEmoji, setIsShowEmoji] = useState(false);
+    const onCloseModal = () => {
+        setShowModal(false);
+        setIsShowEmoji(false);
+        setText('');
+    }
     return (
         <>
             <View style={styles.container}>
                 <TouchableOpacity onPress={setShowModal.bind(null, true)}>
                     <View style={styles.iconContainer}>
-                        <Icon name={'add'} size={30} color={'pink'} />
+                        <Icon name={'add'} size={30} color={'#FF8C00'} />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -33,10 +42,10 @@ const Header = props => {
                                     </Text>
                                 </View>
 
-                                <View style={{ top: -15 }}>
-                                    <TouchableOpacity onPress={setShowModal.bind(null, false)}>
-                                        <View style={{ width: 20, height: 20, borderRadius: 20, borderWidth: 1, justifyContent: 'center', alignItems: 'center', borderColor: 'pink' }}>
-                                            <Icons name={'cross'} size={15} color={'pink'} />
+                                <View style={{ top: -18 }}>
+                                    <TouchableOpacity onPress={onCloseModal}>
+                                        <View style={{ width: 20, height: 20, borderRadius: 20, borderWidth: 1, justifyContent: 'center', alignItems: 'center', borderColor: '#FF8C00' }}>
+                                            <Icons name={'cross'} size={15} color={'#FF8C00'} />
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -58,11 +67,12 @@ const Header = props => {
                                     <CustomIcon name={'md-image-outline'} />
                                 </TouchableOpacity>
                                 <CustomIcon name={'ios-videocam-outline'} />
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={setIsShowEmoji.bind(null, true)}>
                                     <CustomIcon name={'md-happy-sharp'} />
                                 </TouchableOpacity>
 
                             </View>
+
 
                             <TouchableOpacity>
                                 <View style={{ backgroundColor: '#FF8C00', borderRadius: 20, height: 40, justifyContent: 'center', alignItems: 'center' }}>
@@ -75,6 +85,26 @@ const Header = props => {
 
 
                         </View>
+
+                        {
+                            isShowEmoji && (
+                                <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: height / 2.18 }}>
+                                    <TouchableOpacity onPress={setIsShowEmoji.bind(null, false)}>
+                                        <View style={{ width: 20, height: 20, borderRadius: 20, borderWidth: 1, justifyContent: 'center', alignItems: 'center', borderColor: '#FF8C00', alignSelf: 'flex-end', marginBottom: 10 }}>
+                                            <Icons name={'cross'} size={15} color={'#FF8C00'} />
+                                        </View>
+                                    </TouchableOpacity>
+
+                                    <EmojiSelector
+                                        category={Categories.symbols}
+                                        onEmojiSelected={emoji => {
+                                            setText(text + `${emoji}`)
+                                        }}
+
+                                    />
+                                </View>
+                            )
+                        }
                     </View>
                 </Modal>
             </View>
