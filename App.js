@@ -8,6 +8,7 @@
 
 import React from 'react';
 import type { Node } from 'react';
+import Header from './components/Header';
 import {
   SafeAreaView,
   ScrollView,
@@ -21,7 +22,6 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
@@ -63,6 +63,9 @@ const App: () => Node = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+
+      <Header/>
+      
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>

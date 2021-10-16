@@ -36,7 +36,7 @@ const Post = props => { //name //dp // time// postTitle//
                 </View>
 
                 <View style={styles.postImage}>
-                    <Image source={{ uri: props.uri }} />
+                    <Image source={{ uri: props.image }} />
                 </View>
             </View>
 
