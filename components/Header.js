@@ -51,7 +51,7 @@ const Header = props => {
             <View>
                 <Modal isVisible={showModal} useNativeDriver={true} onBackButtonPress={setShowModal.bind(null, false)}>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <View style={{ borderRadius: 10, backgroundColor: 'white', padding: 20, height: pic ? 280+ 120: 280, justifyContent: 'center' }}>
+                        <View style={{ borderRadius: 10, backgroundColor: 'white', padding: 20, height: pic ? 280 + 120 : 280, justifyContent: 'center' }}>
 
 
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
@@ -77,7 +77,7 @@ const Header = props => {
                                 onChangeText={(text) => setText(text)}
                                 multiline={true}
                                 placeholder='write something'
-                                style={{ height: 40, color: 'black', backgroundColor: '#D3D3D3', borderRadius: 10, marginTop: 10, height: 100, justifyContent: 'flex-start' }}
+                                style={{ height: 40, color: 'black', textAlignVertical: 'top', backgroundColor: '#D3D3D3', borderRadius: 10, marginTop: 10, height: 100, justifyContent: 'flex-start' }}
                             />
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10 }}>
@@ -98,15 +98,15 @@ const Header = props => {
 
                             {
                                 pic && (
-                                    <View style={{height: 100, marginBottom: 10, alignItems: 'center', borderWidth: 1}}>
-                                        <Image source={{uri: pic}} style={{width: '80%', height: '100%'}} resizeMode="contain"/>
+                                    <View style={{ height: 100, marginBottom: 10, alignItems: 'center', borderWidth: 1 }}>
+                                        <Image source={{ uri: pic }} style={{ width: '80%', height: '100%' }} resizeMode="contain" />
                                     </View>
                                 )
                             }
 
 
                             <TouchableOpacity onPress={() => {
-                                props.addPosts({name: 'rafeh', img: pic, title: text});
+                                props.addPosts({ name: 'rafeh', img: pic, title: text });
                                 onCloseModal();
                             }}>
                                 <View style={{ backgroundColor: '#FF8C00', borderRadius: 20, height: 40, justifyContent: 'center', alignItems: 'center' }}>
