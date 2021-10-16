@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions, Keyboard, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/Entypo';
 import Modal from "react-native-modal";
 
-import {launchImageLibrary} from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const { height } = Dimensions.get('window')
 
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
-// import Autocomplete from 'react-native-autocomplete-input';
 import CustomIcon from './CustomIcon';
 
 const Header = props => {
     const [showModal, setShowModal] = useState(false);
     const [text, setText] = useState('');
     const [isShowEmoji, setIsShowEmoji] = useState(false);
+    const [pic, setPic] = useState(null);
+
     const onCloseModal = () => {
         setShowModal(false);
         setIsShowEmoji(false);
         setText('');
+        setPic(null);
     }
+
+    const handleImageGallery = () => {
+        console.log('2')
+        launchImageLibrary({
+            mediaType: 'photo'
+        }, (response) => {
+            if (response.didCancel) {
+            } else if (response.error) {
+            } else if (response.customButton) {
+            } else {
+                setPic(response.assets[0].uri)
+            }
+        })
+    }
+
     return (
         <>
             <View style={styles.container}>
@@ -34,7 +51,7 @@ const Header = props => {
             <View>
                 <Modal isVisible={showModal} useNativeDriver={true} onBackButtonPress={setShowModal.bind(null, false)}>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <View style={{ borderRadius: 10, backgroundColor: 'white', padding: 20, height: 280, justifyContent: 'center' }}>
+                        <View style={{ borderRadius: 10, backgroundColor: 'white', padding: 20, height: pic ? 280+ 120: 280, justifyContent: 'center' }}>
 
 
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 5 }}>
@@ -55,7 +72,7 @@ const Header = props => {
                             </View>
 
                             <TextInput
-                            onFocus={setIsShowEmoji.bind(null, false)}
+                                onFocus={setIsShowEmoji.bind(null, false)}
                                 value={text}
                                 onChangeText={(text) => setText(text)}
                                 multiline={true}
@@ -65,7 +82,7 @@ const Header = props => {
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10 }}>
                                 <CustomIcon name={'musical-notes-outline'} />
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={handleImageGallery}>
 
                                     <CustomIcon name={'md-image-outline'} />
                                 </TouchableOpacity>
@@ -78,6 +95,14 @@ const Header = props => {
                                 </TouchableOpacity>
 
                             </View>
+
+                            {
+                                pic && (
+                                    <View style={{height: 100, marginBottom: 10, alignItems: 'center', borderWidth: 1}}>
+                                        <Image source={{uri: pic}} style={{width: '80%', height: '100%'}} resizeMode="contain"/>
+                                    </View>
+                                )
+                            }
 
 
                             <TouchableOpacity>
