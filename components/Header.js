@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/Entypo';
 import Modal from "react-native-modal";
+
+import {launchImageLibrary} from 'react-native-image-picker';
 
 const { height } = Dimensions.get('window')
 
@@ -53,6 +55,7 @@ const Header = props => {
                             </View>
 
                             <TextInput
+                            onFocus={setIsShowEmoji.bind(null, false)}
                                 value={text}
                                 onChangeText={(text) => setText(text)}
                                 multiline={true}
@@ -67,7 +70,10 @@ const Header = props => {
                                     <CustomIcon name={'md-image-outline'} />
                                 </TouchableOpacity>
                                 <CustomIcon name={'ios-videocam-outline'} />
-                                <TouchableOpacity onPress={setIsShowEmoji.bind(null, true)}>
+                                <TouchableOpacity onPress={() => {
+                                    setIsShowEmoji(true);
+                                    Keyboard.dismiss();
+                                }}>
                                     <CustomIcon name={'md-happy-sharp'} />
                                 </TouchableOpacity>
 
