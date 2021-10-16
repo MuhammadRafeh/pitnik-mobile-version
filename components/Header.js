@@ -105,7 +105,10 @@ const Header = props => {
                             }
 
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                props.addPosts({name: 'rafeh', img: pic, title: text});
+                                onCloseModal();
+                            }}>
                                 <View style={{ backgroundColor: '#FF8C00', borderRadius: 20, height: 40, justifyContent: 'center', alignItems: 'center' }}>
                                     <Text style={{ fontWeight: 'bold', color: 'white' }}>
                                         Publish

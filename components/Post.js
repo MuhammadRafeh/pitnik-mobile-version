@@ -16,10 +16,10 @@ const Post = props => { //name //dp // time// postTitle//
                     </View>
                     <View>
                         <View>
-                            <Text>Saim Taren</Text>
+                            <Text>{props.name}</Text>
                         </View>
                         <View>
-                            <Text>1 weeks ago</Text>
+                            <Text>{props.date}</Text>
                         </View>
                     </View>
                 </View>
@@ -32,11 +32,11 @@ const Post = props => { //name //dp // time// postTitle//
             {/* Mid */}
             <View style={styles.post}>
                 <View style={styles.postTitle}>
-                    <Text numberOfLines={3} adjustsFontSizeToFit={true}>This is a post title  asdasd as d description and i am muhammad rafeh and i am doing task at this time</Text>
+                    <Text numberOfLines={3} adjustsFontSizeToFit={true} style={{color: 'black'}}>2323</Text>
                 </View>
 
                 <View style={styles.postImage}>
-                    <Image source={{ uri: props.image }} />
+                    <Image source={{ uri: props.dp }} style={{width: '100%', height: '100%'}}/>
                 </View>
             </View>
 
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     dpContainer: {
         borderRadius: 30,
         borderWidth: 1,
-        marginRight: 10
+        marginRight: 10,
+        overflow: 'hidden'
     },
     section1: {
         flexDirection: 'row',
@@ -91,7 +92,8 @@ const styles = StyleSheet.create({
     },
     post: {
         flex: 1,
-        marginRight: 20
+        marginRight: 20,
+        marginBottom: 10
     },
     footer: {
         flexDirection: 'row',
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
 Post.propTypes = {
     dp: propTypes.any,
     name: propTypes.string,
-    data: propTypes.string,
+    date: propTypes.string,
     postTitle: propTypes.string,
     image: propTypes.any,
     isDarkMode: propTypes.bool

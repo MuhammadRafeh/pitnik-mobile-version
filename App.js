@@ -60,16 +60,29 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const [posts, setPosts] = useState([]);
+
+  const addPosts = data => {
+    
+    setPosts([...posts, {name: data.name, img: data.img, date: new Date().toDateString(), title: data.title}])
+  }
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      <Header suggestions={suggestions}/>
+      <Header suggestions={suggestions} addPosts={addPosts}/>
       
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Post isDarkMode={isDarkMode} />
+        {
+          posts.map((item, key) => {
+            return (
+              <Post name={item.name} dp={item.img} date={item.date} postTitle={item.title} image={item.img}/>
+            )
+          })
+        }
       </ScrollView>
     </SafeAreaView>
   );
