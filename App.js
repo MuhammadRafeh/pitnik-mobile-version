@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { Node } from 'react';
 import Header from './components/Header';
 import {
@@ -55,7 +55,7 @@ const Section = ({ children, title }): Node => {
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const [suggestions, setSuggestions] = useState(['rafeh', 'akif', 'mahran bhai'])
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -64,7 +64,7 @@ const App: () => Node = () => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      <Header/>
+      <Header suggestions={suggestions}/>
       
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
