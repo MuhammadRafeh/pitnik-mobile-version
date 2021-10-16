@@ -78,8 +78,9 @@ const App: () => Node = () => {
         style={backgroundStyle}>
         {
           posts.map((item, key) => {
+            
             return (
-              <Post name={item.name} dp={item.img} date={item.date} postTitle={item.title} image={item.img}/>
+              <Post key={key} name={item.name} dp={item.img} date={item.date} title={item.title} image={item.img}/>
             )
           })
         }

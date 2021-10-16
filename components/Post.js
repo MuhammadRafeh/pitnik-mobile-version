@@ -32,7 +32,7 @@ const Post = props => { //name //dp // time// postTitle//
             {/* Mid */}
             <View style={styles.post}>
                 <View style={styles.postTitle}>
-                    <Text numberOfLines={3} adjustsFontSizeToFit={true} style={{color: 'black'}}>2323</Text>
+                    <Text numberOfLines={3} adjustsFontSizeToFit={true}>{props.title}</Text>
                 </View>
 
                 <View style={styles.postImage}>
