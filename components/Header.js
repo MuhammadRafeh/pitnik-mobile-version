@@ -77,7 +77,8 @@ const Header = props => {
                                 onChangeText={(text) => setText(text)}
                                 multiline={true}
                                 placeholder='write something'
-                                style={{ height: 40, color: 'black', textAlignVertical: 'top', backgroundColor: '#D3D3D3', borderRadius: 10, marginTop: 10, height: 100, justifyContent: 'flex-start' }}
+                                placeholderTextColor='#4f5752'
+                                style={{ height: 40, color: 'black', paddingHorizontal: 10, textAlignVertical: 'top', backgroundColor: '#D3D3D3', borderRadius: 10, marginTop: 10, height: 100, justifyContent: 'flex-start' }}
                             />
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', marginVertical: 10 }}>
@@ -122,7 +123,7 @@ const Header = props => {
 
                         {
                             isShowEmoji && (
-                                <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: height / 2.18 }}>
+                                <View style={{ bottom: 0, left: 0, right: 0, height: height / 2.18 }}>
                                     <TouchableOpacity onPress={setIsShowEmoji.bind(null, false)}>
                                         <View style={{ width: 20, height: 20, borderRadius: 20, borderWidth: 1, justifyContent: 'center', alignItems: 'center', borderColor: '#FF8C00', alignSelf: 'flex-end', marginBottom: 10 }}>
                                             <Icons name={'cross'} size={15} color={'#FF8C00'} />
